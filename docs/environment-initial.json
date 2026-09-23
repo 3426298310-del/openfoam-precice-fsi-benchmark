@@ -1,0 +1,15 @@
+{
+  "os": "PRETTY_NAME=\"Ubuntu 24.04.4 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.4 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "kernel": "7.0.0-31-generic",
+  "cpu_visible": 4,
+  "initial_memory_gib": 3.8,
+  "initial_available_memory_gib": 1.4,
+  "initial_disk_available_gib": 13,
+  "network": {
+    "github_https": "passed",
+    "git_ls_remote": "passed",
+    "precice_https": "passed",
+    "ubuntu_archive_https": "passed",
+    "browser": "not tested; user reported unavailable"
+  }
+}

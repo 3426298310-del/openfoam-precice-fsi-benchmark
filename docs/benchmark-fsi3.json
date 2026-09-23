@@ -1,0 +1,70 @@
+{
+  "case": "Turek-Hron FSI3",
+  "source": "Hron & Turek, ECCOMAS CFD 2006, Figure 5, Table 1, Figure 8 reference row",
+  "source_url": "https://wwwold.mathematik.tu-dortmund.de/papers/HronTurek2006a.pdf",
+  "geometry_m": {
+    "channel_length": 2.5,
+    "channel_height": 0.41,
+    "cylinder_center": [
+      0.2,
+      0.2
+    ],
+    "cylinder_radius": 0.05,
+    "beam_length": 0.35,
+    "beam_height": 0.02,
+    "tip": [
+      0.6,
+      0.2
+    ],
+    "computational_extrusion": 0.01
+  },
+  "fluid": {
+    "density_kg_m3": 1000,
+    "kinematic_viscosity_m2_s": 0.001,
+    "mean_inlet_m_s": 2,
+    "Re": 200,
+    "ramp_seconds": 2
+  },
+  "solid": {
+    "density_kg_m3": 1000,
+    "young_modulus_Pa": 5600000,
+    "poisson_ratio": 0.4,
+    "element": "C3D20R",
+    "out_of_plane_displacement": 0
+  },
+  "numerics": {
+    "dt_s": 0.0005,
+    "end_time_s": 20,
+    "fluid_cells": 6306,
+    "fluid_time_discretization": "Euler",
+    "coupling": "serial-implicit IQN-ILS",
+    "initial_relaxation": 0.1,
+    "relative_tolerance_displacement": 1e-06,
+    "relative_tolerance_force": 0.01,
+    "max_coupling_iterations": 100
+  },
+  "reference": {
+    "definition": "midrange=(max+min)/2; amplitude=(max-min)/2; not RMS or temporal mean",
+    "ux": {
+      "midrange_m": -0.00269,
+      "amplitude_m": 0.00253,
+      "frequency_Hz": 10.9
+    },
+    "uy": {
+      "midrange_m": 0.00148,
+      "amplitude_m": 0.03438,
+      "frequency_Hz": 5.3
+    },
+    "drag": {
+      "midrange_N_per_m": 457.3,
+      "amplitude_N_per_m": 22.66,
+      "frequency_Hz": 10.9
+    },
+    "lift": {
+      "midrange_N_per_m": 2.22,
+      "amplitude_N_per_m": 149.78,
+      "frequency_Hz": 5.3
+    }
+  },
+  "verification_status": "not_yet_compared"
+}

@@ -1,0 +1,58 @@
+{
+  "case": "Turek-Hron FSI1",
+  "source": "Hron & Turek, ECCOMAS CFD 2006, Figure 5, Table 1, Table 2 reference row",
+  "source_url": "https://wwwold.mathematik.tu-dortmund.de/papers/HronTurek2006a.pdf",
+  "geometry_m": {
+    "channel_length": 2.5,
+    "channel_height": 0.41,
+    "cylinder_center": [
+      0.2,
+      0.2
+    ],
+    "cylinder_radius": 0.05,
+    "beam_length": 0.35,
+    "beam_height": 0.02,
+    "tip": [
+      0.6,
+      0.2
+    ],
+    "computational_extrusion": 0.01
+  },
+  "fluid": {
+    "density_kg_m3": 1000,
+    "kinematic_viscosity_m2_s": 0.001,
+    "mean_inlet_m_s": 0.2,
+    "Re": 20,
+    "ramp_seconds": 2
+  },
+  "solid": {
+    "density_kg_m3": 1000,
+    "young_modulus_Pa": 1400000,
+    "poisson_ratio": 0.4,
+    "element": "C3D20R",
+    "out_of_plane_displacement": 0
+  },
+  "numerics": {
+    "dt_s": 0.01,
+    "end_time_s": 20,
+    "fluid_cells": 6306,
+    "fluid_time_discretization": "Euler",
+    "coupling": "serial-implicit IQN-ILS",
+    "initial_relaxation": 0.1,
+    "relative_tolerance_displacement": 1e-06,
+    "relative_tolerance_force": 0.01,
+    "max_coupling_iterations": 100,
+    "absolute_tolerance_displacement_m": 1e-8,
+    "_tuning_note": "Displacement abs-limit was relaxed from 1e-10 (original PR) to 1e-8, and fluid solver tolerances tightened (p 1e-8 / U 1e-9, relTol 1e-5), because the original strict limit did not converge within 100 coupling iterations at dt=0.01 s (see results/runs/fsi1-pilot vs fsi1-pilot-tuned).",
+    "nCorrectors": 2,
+    "nNonOrthogonalCorrectors": 1,
+    "strict_coupling_convergence": true
+  },
+  "reference": {
+    "ux_m": 2.27e-05,
+    "uy_m": 0.0008209,
+    "drag_N_per_m": 14.295,
+    "lift_N_per_m": 0.7638
+  },
+  "verification_status": "not_yet_compared"
+}

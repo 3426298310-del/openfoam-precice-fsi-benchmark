@@ -1,0 +1,12 @@
+downloads/
+upstream/CalculiX/
+upstream/tutorials/
+upstream/openfoam-adapter/
+upstream/calculix-adapter/
+results/runs/
+fluid/constant/polyMesh/
+fluid/dynamicCode/
+__pycache__/
+*.pyc
+
+results/standalone/
