@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python syntax check
+        run: python3 -m py_compile scripts/*.py
+
+      - name: Bash syntax check
+        run: |
+          for f in scripts/*.sh; do
+            bash -n "$f"
+            echo "OK $f"
+          done
+
+      - name: Parse XML configuration
+        run: |
+          python3 - <<'PY'
+          # preCICE 3 config files use namespace-prefixed tags (e.g. <data:vector>)
+          # without declaring the prefixes, which xml.etree.ElementTree rejects.
+          # Use expat for a well-formedness check instead (stdlib, no deps).
+          import xml.parsers.expat
+          for path in ["coupling/precice-config.xml",
+                       "experimental/fsi3/coupling/precice-config.xml"]:
+              parser = xml.parsers.expat.ParserCreate()
+              with open(path, "rb") as f:
+                  parser.ParseFile(f)
+              print("OK", path)
+          PY
+
+      - name: Parse JSON documents
+        run: |
+          python3 - <<'PY'
+          import json
+          for path in ["docs/benchmark.json",
+                       "docs/benchmark-fsi3.json",
+                       "results/fsi1-full/summary.json"]:
+              with open(path) as f:
+                  json.load(f)
+              print("OK", path)
+          PY

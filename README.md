@@ -3,6 +3,8 @@
 Partitioned fluid–structure interaction simulation of the Turek–Hron FSI1
 benchmark using OpenFOAM, CalculiX and preCICE.
 
+[![CI](https://github.com/3426298310-del/turek-hron-fsi/actions/workflows/ci.yml/badge.svg)](https://github.com/3426298310-del/turek-hron-fsi/actions/workflows/ci.yml)
+
 <p align="center">
   <img src="results/fsi1-full/velocity.png" width="49%" alt="Velocity field"/>
   <img src="results/fsi1-full/tip-displacement.png" width="49%" alt="Tip displacement"/>
@@ -13,12 +15,25 @@ benchmark using OpenFOAM, CalculiX and preCICE.
   <img src="results/fsi1-full/velocity-animation.gif" width="49%" alt="Velocity animation"/>
 </p>
 
+## Key Results
+
+A complete 20 s FSI1 simulation — 2000 coupling windows, **0 unconverged**, mean
+2.06 (max 4) coupling iterations per window — compared against the published
+Turek–Hron reference:
+
+| Metric | Relative error |
+| --- | --- |
+| Drag | −0.29 % |
+| Lift | −0.60 % |
+| Tip y-displacement uy | −0.94 % |
+| Tip x-displacement ux | −3.2 % |
+
 ## What I built
 
-A fully reproducible, **partitioned two-way FSI** workflow for the classical
-Turek–Hron benchmark (steady case **FSI1**, Re = 20). The incompressible flow
-past a fixed cylinder with an attached elastic beam is solved by coupling two
-independent solvers at runtime:
+A reproducible partitioned two-way FSI workflow, tested on Ubuntu 24.04, for the
+classical Turek–Hron benchmark (steady case **FSI1**, Re = 20). The
+incompressible flow past a fixed cylinder with an attached elastic beam is
+solved by coupling two independent solvers at runtime:
 
 - **OpenFOAM** (finite volume) solves the moving-mesh Navier–Stokes equations
   for the fluid.
@@ -29,8 +44,41 @@ independent solvers at runtime:
 
 The repository contains the case files, the coupling configuration, automated
 install/build/run/postprocess scripts, and the post-processed results of a
-complete 20 s reference run — everything needed to reproduce the computation
-and inspect the outcome.
+complete 20 s reference run.
+
+## My Contributions
+
+The geometry, mesh, and original case are reused from an upstream
+preCICE-tutorials pull request (preserved under `third_party/`, see
+[`docs/SOURCES.md`](docs/SOURCES.md)). On top of that upstream material, I
+implemented:
+
+1. Migrated the original preCICE v2-style coupling setup to preCICE 3.x syntax.
+2. Replaced the `groovyBC` inlet dependency with a native OpenFOAM
+   `codedFixedValue` implementation.
+3. Corrected the force-monitoring density configuration and unit-depth
+   conversion.
+4. Tuned coupling convergence settings and linear solver tolerances to obtain
+   stable FSI1 convergence.
+5. Built an isolated, reproducible run pipeline using Bash.
+6. Implemented Python post-processing for tip displacement, drag/lift, coupling
+   iteration statistics, and velocity/pressure/vorticity fields.
+7. Completed and analyzed the full 20 s / 2000-window FSI1 simulation.
+8. Quantitatively compared results with published Turek–Hron reference values.
+
+## Repository Structure
+
+| Path | Purpose |
+| --- | --- |
+| `fluid/` | OpenFOAM case (FSI1) |
+| `solid/` | CalculiX input |
+| `coupling/` | preCICE configuration (preCICE 3.x) |
+| `scripts/` | install / run / post-processing |
+| `results/` | post-processed FSI1 results (figures, CSVs, summary) |
+| `docs/` | benchmark parameters, technical report, sources |
+| `experimental/fsi3/` | FSI3 configuration (prepared, not fully run) |
+| `third_party/` | upstream reference material (not authored here) |
+| `.github/` | CI workflow |
 
 ## Solver architecture
 
@@ -96,8 +144,8 @@ deformation are mutually consistent.
 | Poisson's ratio ν_s | 0.4 |
 | Time step / duration | 0.01 s / 20 s (2000 coupling windows) |
 
-Full parameters are in [`docs/benchmark.json`](docs/benchmark.json) and the
-FSI3 variant in [`docs/benchmark-fsi3.json`](docs/benchmark-fsi3.json).
+Full parameters are in [`docs/benchmark.json`](docs/benchmark.json); the FSI3
+parameters are in [`docs/benchmark-fsi3.json`](docs/benchmark-fsi3.json).
 
 ## Numerical results
 
@@ -137,7 +185,7 @@ are built from source (not vendored here) by the install script.
 # 1. Install system packages and build both adapters from source
 bash scripts/install.sh
 
-# 2. Short smoke test (0.01 s) to validate the full coupling chain
+# 2. Short smoke test (0.01 s) to check the full coupling chain
 bash scripts/run.sh smoke 0.01 0.01 fsi1
 
 # 3. Full FSI1 reference run (20 s, ~2000 coupling windows)
@@ -157,11 +205,11 @@ compact, publication-ready artefacts are written to `results/<name>/`.
 
 - No mesh-independence or time-step-independence study has been performed, so
   the agreement with the reference is numerical but not a formal verification.
-- The geometry and mesh are reused from a preCICE-tutorials pull request
-  (CalculiX FSI3 case) that is not an officially released preCICE benchmark.
-- The FSI3 variant (Re = 200, flapping beam) is fully configured and passed
-  short trial runs, but its complete 20 s computation has not been run in this
-  environment.
+- The geometry and mesh are reused from an upstream pull request
+  (`third_party/`) that is not an officially released preCICE benchmark.
+- The FSI3 configuration in `experimental/fsi3/` is prepared and passed short
+  trial runs, but its complete 20 s simulation has **not** been completed; it is
+  **not** part of the completed FSI1 benchmark results.
 
 ## License
 

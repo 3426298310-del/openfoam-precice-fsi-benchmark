@@ -9,7 +9,7 @@ end=${2:-0.01}
 dt=${3:-0.01}
 variant=${4:-fsi1}
 case_root="$FSI_ROOT"
-if [[ "$variant" == fsi3 ]]; then case_root="$FSI_ROOT/variants/fsi3"; elif [[ "$variant" != fsi1 ]]; then exit 2; fi
+if [[ "$variant" == fsi3 ]]; then case_root="$FSI_ROOT/experimental/fsi3"; elif [[ "$variant" != fsi1 ]]; then exit 2; fi
 [[ "$name" =~ ^[a-zA-Z0-9_-]+$ ]] || { echo 'Invalid run name'; exit 2; }
 run="$FSI_ROOT/results/runs/$name"
 mkdir -p "$(dirname "$run")"
