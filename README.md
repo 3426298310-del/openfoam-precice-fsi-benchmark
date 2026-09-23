@@ -3,7 +3,7 @@
 Partitioned fluid–structure interaction simulation of the Turek–Hron FSI1
 benchmark using OpenFOAM, CalculiX and preCICE.
 
-[![CI](https://github.com/3426298310-del/turek-hron-fsi/actions/workflows/ci.yml/badge.svg)](https://github.com/3426298310-del/turek-hron-fsi/actions/workflows/ci.yml)
+[![CI](https://github.com/3426298310-del/openfoam-precice-fsi-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/3426298310-del/openfoam-precice-fsi-benchmark/actions/workflows/ci.yml)
 
 <p align="center">
   <img src="results/fsi1-full/velocity.png" width="49%" alt="Velocity field"/>
