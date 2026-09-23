@@ -66,5 +66,5 @@ if variant=='fsi1' and summary['run_accepted'] and t[-1]>=20-1e-8:
 # Keep compact raw evidence alongside CSVs; full solver logs remain in results/runs.
 for f in ['precice-Solid-watchpoint-flaptip.log','precice-Solid-iterations.log','precice-Solid-convergence.log']:
  shutil.copy(r/'solid'/f,out/f)
-shutil.copy(r/'fluid/checkMesh.log',out/'checkMesh.log');shutil.copy(r/'run.json',out/'run.json')
+shutil.copy(r/'run.json',out/'run.json')
 print(json.dumps(summary,indent=2))

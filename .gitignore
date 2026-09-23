@@ -1,12 +1,52 @@
+# --- Downloaded third-party artifacts (papers, .deb packages) ---
 downloads/
+
+# --- Third-party source & builds (reproduced by scripts/install.sh) ---
 upstream/CalculiX/
 upstream/tutorials/
 upstream/openfoam-adapter/
 upstream/calculix-adapter/
+
+# --- Raw simulation output (large OpenFOAM time directories + postProcessing) ---
 results/runs/
+results/standalone/
+
+# --- Install/build logs (contain absolute build paths, can be large) ---
+results/install/
+
+# --- Exploratory FSI3 trial-run postprocessing (kept on disk, not in repo) ---
+results/pilot/
+results/smoke-absolute/
+results/pilot-analysis.log
+
+# --- Per-run checkMesh log (contains machine hostname / absolute path) ---
+results/*/checkMesh.log
+
+# --- Generated mesh & compiled dynamic code ---
 fluid/constant/polyMesh/
 fluid/dynamicCode/
-__pycache__/
-*.pyc
 
-results/standalone/
+# --- MPI decomposition ---
+processor*/
+processor*
+
+# --- Core dumps & crash files ---
+core
+core.*
+*.core
+*.crash
+crash*/
+
+# --- Python cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- ParaView state files ---
+*.pvsm
+*.pvsm~
+
+# --- Editor / OS ---
+.DS_Store
+*.swp
+*~
