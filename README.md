@@ -58,8 +58,12 @@ FSI benchmark 的「建模 → 分区耦合求解 → 后处理 → 与文献参
 └── upstream/               # 第三方源码（gitignore，不提交）
 ```
 
-`results/runs/`（原始运行目录）与 `upstream/`、下载的论文等均被 `.gitignore`
-排除，只提交配置与可复现的分析结果。
+`.gitignore` 排除原始运行目录 `results/runs/`、独立测试 `results/standalone/`、
+第三方源码与构建产物（`upstream/CalculiX/`、`upstream/tutorials/`、
+`upstream/openfoam-adapter/`、`upstream/calculix-adapter/`）、下载的论文与安装
+包（`downloads/`）以及生成的网格 `fluid/constant/polyMesh/`。仓库保留原始 PR
+案例 `upstream/turek-hron-fsi3-calculix/` 作为来源凭据，并提交可复现的配置、
+脚本、文档与后处理结果。
 
 ## 4. 安装与运行
 
