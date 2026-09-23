@@ -102,8 +102,29 @@ python3 scripts/render_fields.py results/runs/fsi1-full
 
 ## 5. 结果与参考值对比
 
-（此节在完整计算与后处理完成后填写，见 `results/fsi1-full/summary.json` 与
-`docs/technical-report.md`。）
+完整 FSI1 计算（20 s，2000 个耦合窗，全部收敛，平均每窗 2.06 次耦合迭代、最多
+4 次）后，取末 2 s 的稳态平均值与 Hron & Turek 2006 参考值对比如下：
+
+| 量 | 本计算 | 文献参考 | 误差 |
+| --- | --- | --- | --- |
+| 尖端 x 位移 ux | 2.198e-5 m | 2.27e-5 m | −3.2 % |
+| 尖端 y 位移 uy | 8.132e-4 m | 8.209e-4 m | −0.94 % |
+| 阻力 drag | 14.253 N/m | 14.295 N/m | −0.29 % |
+| 升力 lift | 0.7592 N/m | 0.7638 N/m | −0.60 % |
+
+末 2 s 的位移峰峰值约 1e-9 m、力峰峰值约 2e-4 N/m，说明已达到稳态。产物见
+`results/fsi1-full/`：
+
+- `tip-displacement.png/csv`：梁端位移时间历程；
+- `reference-comparison.png`：与参考值的对比；
+- `forces-per-unit-depth.csv`：阻力/升力时间序列；
+- `coupling-iterations.png/csv`、`coupling-residuals.csv`：耦合收敛统计；
+- `pressure.png`、`velocity.png`、`vorticity.png`、`velocity-animation.gif`：
+  流场压力/速度/涡量图与速度动画。
+
+> 说明：该对比属于「与文献参考值数值接近」，尚未做网格无关性与时间步无关性
+> 研究，不能替代严格验证（`summary.json` 中状态为
+> `compared_not_grid_verified`）。
 
 ## 6. 限制与说明
 

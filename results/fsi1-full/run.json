@@ -1,0 +1,10 @@
+{
+  "name": "fsi1-full",
+  "end_time": 20.0,
+  "dt": 0.01,
+  "benchmark": "fsi1",
+  "started_utc": "2026-09-23T11:24:56.216316+00:00",
+  "status": "completed",
+  "exit_code": 0,
+  "finished_utc": "2026-09-23T11:33:08.269918+00:00"
+}

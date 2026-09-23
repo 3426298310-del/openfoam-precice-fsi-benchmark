@@ -1,0 +1,56 @@
+{
+  "run": {
+    "name": "fsi1-full",
+    "end_time": 20.0,
+    "dt": 0.01,
+    "benchmark": "fsi1",
+    "started_utc": "2026-09-23T11:24:56.216316+00:00",
+    "status": "completed",
+    "exit_code": 0,
+    "finished_utc": "2026-09-23T11:33:08.269918+00:00"
+  },
+  "last_time_s": 20.0,
+  "accepted_windows": 2000,
+  "unconverged_windows": 0,
+  "iterations_mean": 2.0555,
+  "iterations_max": 4,
+  "ux_range_m": [
+    -3.5234389e-06,
+    2.97857531e-05
+  ],
+  "uy_range_m": [
+    -0.000212083638,
+    0.00081320716
+  ],
+  "run_accepted": true,
+  "reference_comparison": {
+    "status": "compared_not_grid_verified",
+    "values": {
+      "ux": {
+        "mean_last_2s_m": 2.198014325920398e-05,
+        "last_2s_peak_to_peak_m": 4.1000000025907465e-12,
+        "reference_m": 2.27e-05,
+        "error_percent": -3.171175069585996
+      },
+      "uy": {
+        "mean_last_2s_m": 0.0008132065531990051,
+        "last_2s_peak_to_peak_m": 1.20800000005198e-09,
+        "reference_m": 0.0008209,
+        "error_percent": -0.9371965892307077
+      },
+      "drag": {
+        "mean_last_2s_N_per_m": 14.252879929920397,
+        "last_2s_peak_to_peak_N_per_m": 0.00016797400000179152,
+        "reference_N_per_m": 14.295,
+        "error_percent": -0.29464896872754925
+      },
+      "lift": {
+        "mean_last_2s_N_per_m": 0.7591886550178606,
+        "last_2s_peak_to_peak_N_per_m": 0.0020439877400000306,
+        "reference_N_per_m": 0.7638,
+        "error_percent": -0.6037372325398589
+      }
+    },
+    "note": "FSI1 steady reference. Time-step and spatial convergence need separate studies."
+  }
+}
